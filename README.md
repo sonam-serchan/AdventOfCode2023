@@ -10,6 +10,8 @@ E.g.
 
 `us5af4kd5o` -> firstDigit is 5, there's secondDigit in the middle but we don't care about that, the lastDigit is 5 again. So the callibration is 55 (String(firstDigit, secondDigit))
 
+Calculate callibration for each word in the input file, and get the sum of all calibration values.
+
 More in detail about the puzzle:
 
 --- Day 1: Trebuchet?! ---
