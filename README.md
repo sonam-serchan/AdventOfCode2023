@@ -2,7 +2,7 @@
 
 ## https://adventofcode.com/2023/day/1
 
-### TlDr:
+## TlDr:
 
 Get the sum of callibration of each word for the given input words in the file. Here, calibration means - A string of firstDigit and secondDigit.
 
@@ -12,7 +12,7 @@ E.g.
 
 Calculate callibration for each word in the input file, and get the sum of all calibration values.
 
-More in detail about the puzzle:
+## More in detail about the puzzle:
 
 --- Day 1: Trebuchet?! ---
 Something is wrong with global snow production, and you've been selected to take a look. The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
