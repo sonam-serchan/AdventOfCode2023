@@ -2,6 +2,16 @@
 
 ## https://adventofcode.com/2023/day/1
 
+### TlDr:
+
+Get the sum of callibration of each word for the given input words in the file. Here, calibration means - A string of firstDigit and secondDigit.
+
+E.g.
+
+`us5af4kd5o` -> firstDigit is 5, there's secondDigit in the middle but we don't care about that, the lastDigit is 5 again. So the callibration is 55 (String(firstDigit, secondDigit))
+
+More in detail about the puzzle:
+
 --- Day 1: Trebuchet?! ---
 Something is wrong with global snow production, and you've been selected to take a look. The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
 
