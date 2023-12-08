@@ -1,59 +1,89 @@
-import com.sun.jdi.CharType;
-
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    private static final Map<String, String> prefixMap = new HashMap<>();
+
+    static {
+        prefixMap.put("one", "1");
+        prefixMap.put("two", "2");
+        prefixMap.put("three", "3");
+        prefixMap.put("four", "4");
+        prefixMap.put("five", "5");
+        prefixMap.put("six", "6");
+        prefixMap.put("seven", "7");
+        prefixMap.put("eight", "8");
+        prefixMap.put("nine", "9");
+    }
+
+    public static int convertToNumber(String strNum) {
+        try {
+            return Integer.parseInt(strNum);
+        } catch(NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    public static boolean isNumeric(String strNum) {
+        try {
+            int num = convertToNumber((strNum));
+            return num != 0;
+        } catch(NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public static String matchingPrefix(String word) {
+        for(String key: prefixMap.keySet()) {
+            if (word.startsWith(key)) {
+                return prefixMap.get(key);
+            }
+        }
+        return "";
+    }
+
     public static void main(String[] args) {
-        // read the input file
         File file = new File("src/inputs.txt");
+        int sum = 0;
 
         try {
-            // scan the file
             Scanner sc = new Scanner(file);
 
-            // variable to store the sum of all calibration values
-            int sum = 0;
-
-            // loop over the file
-            while(sc.hasNextLine()) {
-
-                // check each word
+            while (sc.hasNextLine()) {
                 String word = sc.nextLine();
 
-                // store first and last digit
-                String firstDigit = "";
-                String lastDigit = "";
+                ArrayList<String> digits = new ArrayList<>();
 
-                // loop over the word
                 for (int i = 0; i < word.length(); i++) {
-                    try {
-                        // parse each character to integer
-                        int parsedNumber = Integer.parseInt(String.valueOf(word.charAt(i)));
+                    String character = word.substring(i, i + 1);
 
-                        // assign to both firstDigit and lastDigit with the first digit found
-                        if (firstDigit.isEmpty()) {
-                            firstDigit = String.valueOf(parsedNumber);
-                            lastDigit = String.valueOf(parsedNumber);
-                        } else {
-                            // if another digit found
-                            lastDigit = String.valueOf(parsedNumber);
+                    if(isNumeric(character)) {
+                        digits.add(character);
+                    } else {
+                        // check if the substring starting from this index matches one of the letter digits
+                        String remainingWord = word.substring(i);
+                        String matchingDigit = matchingPrefix(remainingWord);
+                        if (!matchingDigit.isEmpty()) {
+                            digits.add(matchingDigit);
                         }
-                    } catch (NumberFormatException exception) {
-                        System.out.println("Exception");
                     }
                 }
-                // Store calibration of the word in the variable
+
+                String firstDigit = digits.get(0);
+                String lastDigit = digits.get(digits.size() - 1);
+
                 String calibration = firstDigit + lastDigit;
 
-                // sum all calibrations
-                sum += Integer.parseInt(calibration);
+                sum += convertToNumber(calibration);
             }
-            // print total sum of calibrations
-            System.out.println("sum "+ sum);
-        } catch (FileNotFoundException s) {
-            System.out.println("Exception");
+
+            System.out.println(sum);
+        } catch(FileNotFoundException ex) {
+            System.out.println(ex);
         }
 
     }
