@@ -1,3 +1,5 @@
+package Day1;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        File file = new File("src/inputs.txt");
+        File file = new File("src/day1/inputs.txt");
         int sum = 0;
 
         try {
