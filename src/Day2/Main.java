@@ -26,6 +26,7 @@ public class Main {
 
     private static void processGameFile(BufferedReader br) throws IOException {
         int validGameIdsSum = 0;
+        int powerSum = 0;
         String line;
 
         while((line = br.readLine()) != null) {
@@ -33,8 +34,9 @@ public class Main {
             if (gameResult.isValidGame)  {
                 validGameIdsSum += gameResult.gameId;
             }
+            powerSum += gameResult.power;
         }
-        System.out.println("The game ids sum is " + validGameIdsSum);
+        System.out.println("The game ids sum is " + validGameIdsSum + " and the sum of powers is " + powerSum);
     }
 
     private static GameResult processGameLine(String line) {
@@ -44,8 +46,9 @@ public class Main {
 
         Map<String, Integer> ballScores = calculateBallScores(sets);
         boolean isValidGame = isValidGame(ballScores);
+        int power = ballScores.get("red") * ballScores.get("green") * ballScores.get("blue");
 
-        return new GameResult(gameId, isValidGame);
+        return new GameResult(gameId, isValidGame, power);
     }
 
     private static Map<String, Integer> calculateBallScores(String[] sets) {
@@ -77,6 +80,6 @@ public class Main {
         return Integer.parseInt(str);
     }
 
-    private record GameResult(int gameId, boolean isValidGame) {
+    private record GameResult(int gameId, boolean isValidGame, int power) {
     }
 }
